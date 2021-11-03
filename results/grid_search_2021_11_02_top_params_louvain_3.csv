@@ -1,0 +1,6 @@
+graph_embeddings_factor,min_df,pca_components,topics_sizes,similarity_bibliographic_coupling,similarity_cocitation,similarity_text,max_features,text_embeddings_factor,similarity_citation,louvain_resolution,method,max_df,adjusted_mutual_info_score,n_clusters
+0.0,0.0,0.0,"[50, 10]",1.0,1.0,0.0,0.0,0.0,3.0,0.8,louvain,0.0,0.39370705396819267,6.625
+0.0,0.0,0.0,"[20, 10]",1.0,1.0,0.0,0.0,0.0,3.0,0.8,louvain,0.0,0.39370705396819267,6.625
+0.0,0.0,0.0,"[20, 10]",0.0,3.0,0.0,0.0,0.0,10.0,0.8,louvain,0.0,0.38098732024687754,6.875
+0.0,0.0,0.0,"[50, 10]",0.0,3.0,0.0,0.0,0.0,10.0,0.8,louvain,0.0,0.38098732024687754,6.875
+0.0,0.0,0.0,"[50, 10]",3.0,3.0,0.0,0.0,0.0,10.0,0.8,louvain,0.0,0.37791814220628167,6.625

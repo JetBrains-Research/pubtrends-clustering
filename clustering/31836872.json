@@ -1,0 +1,181 @@
+[
+    {
+        "title": "INTRODUCTION",
+        "references": [
+            4305197,
+            29379211,
+            30333613,
+            30874354,
+            27562062,
+            28142324,
+            28363157,
+            25677494,
+            31002794,
+            22370719,
+            19661265,
+            26795247
+        ]
+    },
+    {
+        "title": "Phase 1 of B cell memory",
+        "references": [
+            {
+                "title": "Antigen-\u200bdriven differentiation of naive B cells.",
+                "references": [
+                    19481917,
+                    31285625,
+                    30312894,
+                    25324126,
+                    9651253,
+                    29249358,
+                    23749966,
+                    12354385,
+                    22370719,
+                    23749966,
+                    21482090,
+                    16476769,
+                    16476769
+                ]
+            },
+            {
+                "title": "Precursory frequency, antigen affinity and avidity.",
+                "references": [
+                    29287996,
+                    23684984,
+                    20142430,
+                    20505142,
+                    20505144,
+                    28498098,
+                    30504208,
+                    29287996
+                ]
+            },
+            {
+                "title": "Molecular mechanisms of fate instruction.",
+                "references": [
+                    29884460,
+                    28183981,
+                    29337666
+                ]
+            },
+            {
+                "title": "Impact of antigen structure",
+                "references": [
+                    17110440,
+                    20948547,
+                    29325819,
+                    25330199,
+                    19503106,
+                    17379546,
+                    19185517,
+                    19503106,
+                    17934446,
+                    19515546,
+                    19515546,
+                    17112751,
+                    18261920,
+                    16616474,
+                    30504208,
+                    27183103,
+                    19135393
+                ]
+            },
+            {
+                "title": "Effect of pathogen products in the microenvironment.",
+                "references": [
+                    29476183,
+                    30312894,
+                    16461338,
+                    19029902,
+                    29476183,
+                    25858157
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Phase 2 of B cell memory",
+        "references": [
+            {
+                "title": "Antigen-\u200bdriven differentiation of GC B cells.",
+                "references": [
+                    21642988,
+                    25757620,
+                    26104192,
+                    23749966,
+                    9846699,
+                    30312894,
+                    25505290,
+                    30030323,
+                    18299574
+                ]
+            },
+            {
+                "title": "Affinity thresholds and GC B cell selection.",
+                "references": [
+                    31285625,
+                    28690317,
+                    23686338,
+                    30504208,
+                    29396161,
+                    30504208,
+                    27183103,
+                    30504208,
+                    30504208
+                ]
+            },
+            {
+                "title": "Further differentiation of GC B cells.",
+                "references": [
+                    26795247,
+                    9214617,
+                    17030950,
+                    29669250,
+                    29262350,
+                    27158841,
+                    27158841,
+                    19855380,
+                    23850379,
+                    21310965,
+                    21310965,
+                    29884459,
+                    24880458,
+                    31225793
+                ]
+            },
+            {
+                "title": "Roles of long-lived plasma cells and memory B cells in protective immunity.",
+                "references": [
+                    22162833,
+                    31231764,
+                    26631631,
+                    24141387,
+                    29709214
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Effect of chronic infections on memory B cells",
+        "references": [
+            28735813,
+            28735813
+        ]
+    },
+    {
+        "title": "Prophylactic antibodies",
+        "references": [
+            29379211,
+            30333613,
+            25757620,
+            26104192
+        ]
+    },
+    {
+        "title": "Box 1 | T FH cells in B cell memory",
+        "references": [
+            31117010,
+            30150988
+        ]
+    }
+]

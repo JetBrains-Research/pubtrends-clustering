@@ -1,0 +1,376 @@
+[
+    {
+        "title": "INTRODUCTION",
+        "references": [
+            4913914,
+            13580867,
+            11733745,
+            8252621,
+            10706289,
+            15131266,
+            24184936,
+            15131266,
+            24184936,
+            22955620,
+            15499007,
+            22541426,
+            28840253,
+            14735121,
+            17510665,
+            22113163
+        ]
+    },
+    {
+        "title": "ncRNAs in network motifs",
+        "references": [
+            28209991,
+            14735121,
+            17510665,
+            17510665,
+            {
+                "title": "Feedback loops",
+                "references": [
+                    27886176,
+                    27886176,
+                    17510665,
+                    27886176
+                ]
+            },
+            {
+                "title": "Feedforward loops",
+                "references": [
+                    17510665,
+                    26555894,
+                    26555894,
+                    26555894,
+                    27325641
+                ]
+            }
+        ]
+    },
+    {
+        "title": "ncRNA genes can occupy multiple nodes",
+        "references": [
+            27325641,
+            {
+                "title": "ncRNAs with context-dependent roles",
+                "references": [
+                    27325641,
+                    27325641,
+                    27325641,
+                    20936047,
+                    19966860,
+                    20936047,
+                    25977730,
+                    25977730,
+                    25977730,
+                    23505378,
+                    23505378
+                ]
+            },
+            {
+                "title": "Supergenes",
+                "references": [
+                    21045082,
+                    27535639,
+                    {
+                        "title": "Type I supergenes",
+                        "references": [
+                            28215706,
+                            6174225,
+                            28215706,
+                            28215706,
+                            28215706
+                        ]
+                    },
+                    {
+                        "title": "Type II supergenes",
+                        "references": [
+                            17379774,
+                            20388800,
+                            25664725,
+                            18404146,
+                            23376929,
+                            23376929,
+                            23376929,
+                            19041754,
+                            23073843,
+                            23129630,
+                            23073843,
+                            23129630,
+                            19041754,
+                            20797886,
+                            19041754,
+                            26823496,
+                            19933153,
+                            27263052,
+                            19850906,
+                            23297232,
+                            21855800,
+                            23183536,
+                            19933153,
+                            20181738,
+                            27071132,
+                            23297232,
+                            27071132,
+                            27015120,
+                            25957686,
+                            25957686
+                        ]
+                    },
+                    {
+                        "title": "Type III supergenes",
+                        "references": [
+                            17237358,
+                            18719115,
+                            26687445,
+                            26687445,
+                            23728290,
+                            28611183,
+                            28611183,
+                            24055342,
+                            25058480,
+                            21940503,
+                            21940503,
+                            17237358,
+                            24988946,
+                            25889562,
+                            26353930,
+                            26376677,
+                            17237358,
+                            22684254
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Other patterns of ncRNA networks",
+        "references": [
+            {
+                "title": "Regulation of protein complexes",
+                "references": [
+                    26041786,
+                    {
+                        "title": "Riboproteins.",
+                        "references": [
+                            7544491
+                        ]
+                    },
+                    {
+                        "title": "ncRNA guides.",
+                        "references": [
+                            26040603,
+                            26077373
+                        ]
+                    },
+                    {
+                        "title": "Recruitment of protein complexes",
+                        "references": [
+                            20393566,
+                            20393566,
+                            20393566,
+                            26378045,
+                            25908244,
+                            25601759,
+                            24076601,
+                            25842979,
+                            25087872
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Control via competitive interactions",
+                "references": [
+                    17643101,
+                    21802130,
+                    24429633,
+                    18026085,
+                    17694064,
+                    21802130,
+                    21802130,
+                    24429633,
+                    22000014,
+                    22000013,
+                    22000015,
+                    22000016,
+                    24793693,
+                    25449132,
+                    24992957,
+                    23055620,
+                    21143814,
+                    25378249,
+                    24926662,
+                    26308063,
+                    21802130,
+                    24429633,
+                    27040487,
+                    24429633,
+                    {
+                        "title": "Competing lncRNAs",
+                        "references": [
+                            25843629,
+                            25843629,
+                            25843629
+                        ]
+                    },
+                    {
+                        "title": "Decoy role of circRNAs.",
+                        "references": [
+                            7684656,
+                            23446346,
+                            25749389,
+                            23446346,
+                            23446348,
+                            23384942,
+                            24014594,
+                            28174233,
+                            26861625,
+                            26861625,
+                            25921068
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Interactions between long RNAs",
+                "references": [
+                    20673990,
+                    22841487,
+                    22841487,
+                    22841487,
+                    23328481,
+                    21307942,
+                    28004750,
+                    28004750,
+                    28553938,
+                    28553938
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Disruption of ncRNA networks in cancer",
+        "references": [
+            28622506,
+            28320778,
+            {
+                "title": "Remodelling of ncRNA networks",
+                "references": [
+                    27518567,
+                    24344243,
+                    27518567,
+                    27518567,
+                    27518567,
+                    27518567,
+                    19147828,
+                    27518567
+                ]
+            },
+            {
+                "title": "Altered targeting by ncRNA",
+                "references": [
+                    {
+                        "title": "Altered adenosine-to-inosine editing reprogrammes miRNA targeting",
+                        "references": [
+                            26648264,
+                            15342557,
+                            26051678,
+                            20835992,
+                            26275108,
+                            26980570,
+                            26980570,
+                            26980570,
+                            23622242,
+                            26648264,
+                            25582055,
+                            25686251,
+                            25686251,
+                            26640150,
+                            27292188,
+                            27494666
+                        ]
+                    },
+                    {
+                        "title": "3'UTR variations in cancer alter miRNA targeting in ncRNA networks",
+                        "references": [
+                            23774734,
+                            24145798,
+                            23614619,
+                            17584784,
+                            18922928,
+                            21084273,
+                            26930719,
+                            26930719,
+                            27213290
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Box 1 | Tools for researching ncRNA networks in cancer",
+        "references": [
+            {
+                "title": "Database tools.",
+                "references": [
+                    27089332,
+                    25800746,
+                    25654590,
+                    25691825,
+                    23272654,
+                    26578591,
+                    25416797,
+                    27207881,
+                    27725737,
+                    25234927
+                ]
+            },
+            {
+                "title": "Tools for the bench",
+                "references": [
+                    26130076,
+                    25954300,
+                    26040603,
+                    25414344,
+                    27444227,
+                    17694064,
+                    23752312
+                ]
+            },
+            {
+                "title": "Tools for in vivo manipulation of ncRNA networks",
+                "references": [
+                    24859533,
+                    26082843,
+                    22685206,
+                    25409146,
+                    23243023
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Box 2 | Epigenetic changes in cancer alter the balance of ncRNA networks",
+        "references": [
+            27821766,
+            27821766,
+            20802525,
+            18768788,
+            17308079,
+            27094684
+        ]
+    },
+    {
+        "title": "PERSPECTIVES",
+        "references": [
+            17510665,
+            22595628,
+            23805382,
+            25349424
+        ]
+    }
+]
