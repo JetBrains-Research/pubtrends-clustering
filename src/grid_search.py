@@ -16,7 +16,7 @@ from sklearn.cluster import DBSCAN
 
 from pysrc.papers.analysis.graph import to_weighted_graph
 from pysrc.papers.analysis.node2vec import node2vec
-from pysrc.papers.analysis.text import build_stemmed_corpus, vectorize_corpus, word2vec_tokens, texts_embeddings
+from pysrc.papers.analysis.text import build_stemmed_corpus, vectorize_corpus, tokens_embeddings, texts_embeddings
 from pysrc.papers.analysis.topics import cluster_and_sort, compute_topics_similarity_matrix
 from pysrc.papers.analyzer import PapersAnalyzer
 from pysrc.papers.utils import SEED
@@ -27,7 +27,7 @@ from utils.preprocessing import preprocess_clustering, get_clustering_level
 celery_app = Celery('grid_search', backend='redis://localhost:6379', broker='redis://localhost:6379')
 
 # Without extension
-OUTPUT_NAME = 'grid_search_2021_11_02'
+OUTPUT_NAME = 'grid_search_2021_11_17'
 
 # Save all generated partitions for further investigation
 # (might consume a LOT of space)
@@ -332,7 +332,7 @@ def preprocess_embeddings(
         max_df=max_df,
     )
     logger.debug('Analyzing tokens embeddings')
-    corpus_tokens_embedding = word2vec_tokens(
+    corpus_tokens_embedding = tokens_embeddings(
         corpus, corpus_tokens
     )
     logger.debug('Analyzing texts embeddings')
