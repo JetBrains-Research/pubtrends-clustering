@@ -17,7 +17,8 @@ from sklearn.cluster import DBSCAN
 from pysrc.fasttext.fasttext import PRETRAINED_MODEL_CACHE
 from pysrc.papers.analysis.graph import to_weighted_graph
 from pysrc.papers.analysis.node2vec import node2vec
-from pysrc.papers.analysis.text import build_stemmed_corpus, vectorize_corpus, tokens_embeddings, texts_embeddings
+from pysrc.papers.analysis.text import build_stemmed_corpus, vectorize_corpus, tokens_embeddings, texts_embeddings, \
+    train_word2vec
 from pysrc.papers.analysis.topics import cluster_and_sort, compute_topics_similarity_matrix
 from pysrc.papers.analyzer import PapersAnalyzer
 from pysrc.papers.utils import SEED
@@ -28,7 +29,7 @@ from utils.preprocessing import preprocess_clustering, get_clustering_level
 celery_app = Celery('grid_search', backend='redis://localhost:6379', broker='redis://localhost:6379')
 
 # Without extension
-OUTPUT_NAME = 'grid_search_2021_11_17'
+OUTPUT_NAME = 'grid_search_2021_11_19'
 
 # Save all generated partitions for further investigation
 # (might consume a LOT of space)
@@ -39,7 +40,8 @@ topics_sizes = [(20, 10), (10, 50), (50, 10)]
 
 louvain_resolution = [0.8]
 embeddings_factor = [1, 3, 10]
-pca_components = [15]
+embeddings = ['fasttext', 'word2vec']
+pca_components = [15, 30]
 min_df = [0.001]
 max_df = [0.8]
 max_features = [10000]
@@ -62,6 +64,7 @@ embeddings_params = dict(
     similarity_bibliographic_coupling=similarity_weights.copy(), similarity_cocitation=similarity_weights.copy(),
     similarity_citation=similarity_weights.copy(),
     min_df=min_df.copy(), max_df=max_df.copy(), max_features=max_features.copy(),
+    embeddings=embeddings.copy(),
     embeddings_factor_graph=embeddings_factor.copy(), embeddings_factor_text=embeddings_factor.copy(),
     pca_components=pca_components.copy(),
     topics_sizes=topics_sizes.copy()
@@ -72,6 +75,7 @@ dbscan_params = dict(
     similarity_bibliographic_coupling=similarity_weights.copy(), similarity_cocitation=similarity_weights.copy(),
     similarity_citation=similarity_weights.copy(),
     min_df=min_df.copy(), max_df=max_df.copy(), max_features=max_features.copy(),
+    embeddings=embeddings.copy(),
     graph_embeddings_factor=embeddings_factor.copy(), text_embeddings_factor=embeddings_factor.copy(),
     topics_sizes=topics_sizes.copy()
 )
@@ -79,6 +83,7 @@ dbscan_params = dict(
 param_grid = [
     embeddings_params,
     louvain_params,
+    dbscan_params,
     lda_params
 ]
 
@@ -144,6 +149,9 @@ def cluster_lda(X, topics_max_numbers, topic_min_size):
     l = 1
 
     prev_min_size = None
+    n_clusters = 1
+    clusters = [0] * X.shape[0]
+    clusters_counter = Counter(clusters)
     while l < r - 1:
         n_clusters = int((l + r) / 2)
         lda = LatentDirichletAllocation(n_components=n_clusters, random_state=SEED).fit(X)
@@ -321,43 +329,62 @@ def preprocess_embeddings(
         similarity_bibliographic_coupling,
         similarity_cocitation,
         similarity_citation,
+        embeddings,
         embeddings_factor_graph,
         embeddings_factor_text
 ):
     subgraph_df = pd.DataFrame(dict(id=subgraph_df_ids, title=subgraph_df_titles, abstract=subgraph_df_abstracts,
                                     mesh=subgraph_df_meshs, keywords=subgraph_df_keywords))
-    corpus, corpus_tokens, corpus_counts = vectorize_corpus(
-        subgraph_df,
-        max_features=max_features,
-        min_df=min_df,
-        max_df=max_df,
-    )
-    logger.debug('Analyzing tokens embeddings')
-    model = PRETRAINED_MODEL_CACHE.download_and_load_model
-    corpus_tokens_embedding = np.array([
-        model.get_vector(t) if model.has_index_for(t)
-        else np.zeros(model.vector_size)  # Support out-of-dictionary missing embeddings
-        for t in corpus_tokens
-    ])
-    logger.debug('Analyzing texts embeddings')
-    texts_embds = texts_embeddings(
-        corpus_counts, corpus_tokens_embedding
-    )
-    logger.debug('Analyzing papers graph embeddings')
-    similarity_func = get_similarity_func(similarity_bibliographic_coupling,
-                                          similarity_cocitation,
-                                          similarity_citation)
-    weighted_similarity_graph = to_weighted_graph(subgraph, weight_func=similarity_func)
-    logger.debug('Prepare sparse graph for visualization')
 
-    sparse_papers_graph = PapersAnalyzer.prepare_sparse_papers_graph(subgraph, weighted_similarity_graph)
-    graph_embds = node2vec(subgraph_df['id'], sparse_papers_graph)
+    logger.debug('Analyzing texts embeddings')
+    if embeddings_factor_text != 0:
+        corpus, corpus_tokens, corpus_counts = vectorize_corpus(
+            subgraph_df,
+            max_features=max_features,
+            min_df=min_df,
+            max_df=max_df,
+        )
+        tokens_embds = get_tokens_embeddings(corpus, corpus_tokens, embeddings)
+        texts_embds = texts_embeddings(
+            corpus_counts, tokens_embds
+        )
+    else:
+        texts_embds = np.zeros(shape=(len(subgraph_df), 0))
+
+    logger.debug('Analyzing papers graph embeddings')
+    if embeddings_factor_graph != 0:
+        similarity_func = get_similarity_func(similarity_bibliographic_coupling,
+                                              similarity_cocitation,
+                                              similarity_citation)
+        weighted_similarity_graph = to_weighted_graph(subgraph, weight_func=similarity_func)
+        logger.debug('Prepare sparse graph for visualization')
+        sparse_papers_graph = PapersAnalyzer.prepare_sparse_papers_graph(subgraph, weighted_similarity_graph)
+        graph_embds = node2vec(subgraph_df['id'], sparse_papers_graph)
+    else:
+        graph_embds = np.zeros(shape=(len(subgraph_df), 0))
+
     logger.debug('Computing aggregated graph and text embeddings for papers')
     papers_embeddings = np.concatenate(
         (graph_embds * embeddings_factor_graph,
          texts_embds * embeddings_factor_text), axis=1)
 
     return papers_embeddings
+
+
+def get_tokens_embeddings(corpus, corpus_tokens, embeddings):
+    logger.debug('Analyzing tokens embeddings')
+    if embeddings == 'fasttext':
+        model = PRETRAINED_MODEL_CACHE.download_and_load_model
+        corpus_tokens_embedding = np.array([
+            model.get_vector(t) if model.has_index_for(t)
+            else np.zeros(model.vector_size)  # Support out-of-dictionary missing embeddings
+            for t in corpus_tokens
+        ])
+    elif embeddings == 'word2vec':
+        corpus_tokens_embedding = train_word2vec(corpus, corpus_tokens)
+    else:
+        raise Exception(f'Unkown embeddings type {embeddings}')
+    return corpus_tokens_embedding
 
 
 def topic_analysis_embeddings(analyzer, subgraph, **settings):
@@ -377,6 +404,7 @@ def topic_analysis_embeddings(analyzer, subgraph, **settings):
         settings['similarity_bibliographic_coupling'],
         settings['similarity_cocitation'],
         settings['similarity_citation'],
+        settings['embeddings'],
         settings['embeddings_factor_graph'], settings['embeddings_factor_text']
     )
     logger.debug('Computing PCA projection')
@@ -409,6 +437,7 @@ def topic_analysis_dbscan(analyzer, subgraph, **settings):
         settings['similarity_bibliographic_coupling'],
         settings['similarity_cocitation'],
         settings['similarity_citation'],
+        settings['embeddings'],
         settings['embeddings_factor_graph'], settings['embeddings_factor_text']
     )
     topics_max_number, topic_min_size = settings['topics_sizes']
