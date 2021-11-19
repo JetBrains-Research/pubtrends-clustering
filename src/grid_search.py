@@ -14,6 +14,7 @@ from sklearn.model_selection import ParameterGrid
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import DBSCAN
 
+from pysrc.fasttext.fasttext import PRETRAINED_MODEL_CACHE
 from pysrc.papers.analysis.graph import to_weighted_graph
 from pysrc.papers.analysis.node2vec import node2vec
 from pysrc.papers.analysis.text import build_stemmed_corpus, vectorize_corpus, tokens_embeddings, texts_embeddings
@@ -332,9 +333,12 @@ def preprocess_embeddings(
         max_df=max_df,
     )
     logger.debug('Analyzing tokens embeddings')
-    corpus_tokens_embedding = tokens_embeddings(
-        corpus, corpus_tokens
-    )
+    model = PRETRAINED_MODEL_CACHE.download_and_load_model
+    corpus_tokens_embedding = np.array([
+        model.get_vector(t) if model.has_index_for(t)
+        else np.zeros(model.vector_size)  # Support out-of-dictionary missing embeddings
+        for t in corpus_tokens
+    ])
     logger.debug('Analyzing texts embeddings')
     texts_embds = texts_embeddings(
         corpus_counts, corpus_tokens_embedding
