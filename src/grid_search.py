@@ -29,7 +29,7 @@ from utils.preprocessing import preprocess_clustering, get_clustering_level
 celery_app = Celery('grid_search', backend='redis://localhost:6379', broker='redis://localhost:6379')
 
 # Without extension
-OUTPUT_NAME = 'grid_search_2021_11_19'
+OUTPUT_NAME = 'grid_search_2021_11_21'
 
 # Save all generated partitions for further investigation
 # (might consume a LOT of space)
@@ -76,7 +76,7 @@ dbscan_params = dict(
     similarity_citation=similarity_weights.copy(),
     min_df=min_df.copy(), max_df=max_df.copy(), max_features=max_features.copy(),
     embeddings=embeddings.copy(),
-    graph_embeddings_factor=embeddings_factor.copy(), text_embeddings_factor=embeddings_factor.copy(),
+    embeddings_factor_graph=embeddings_factor.copy(), embeddings_factor_text=embeddings_factor.copy(),
     topics_sizes=topics_sizes.copy()
 )
 
