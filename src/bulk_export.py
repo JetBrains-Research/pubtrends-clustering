@@ -45,8 +45,7 @@ def export_analysis(pmid):
             PapersAnalyzer.EXPAND_CITATIONS_Q_LOW,
             PapersAnalyzer.EXPAND_CITATIONS_Q_HIGH,
             PapersAnalyzer.EXPAND_CITATIONS_SIGMA,
-            PapersAnalyzer.EXPAND_SIMILARITY_THRESHOLD,
-            Progress(1)
+            PapersAnalyzer.EXPAND_SIMILARITY_THRESHOLD
         )
 
         analyzer.analyze_papers(ids, query, task=None)
