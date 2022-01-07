@@ -7,7 +7,6 @@ from pysrc.papers.analysis.expand import expand_ids
 from pysrc.papers.analyzer import PapersAnalyzer
 from pysrc.papers.config import PubtrendsConfig
 from pysrc.papers.db.loaders import Loaders
-from pysrc.papers.progress import Progress
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
 
@@ -34,19 +33,12 @@ def export_analysis(pmid):
     loader = Loaders.get_loader(SOURCE, config)
     analyzer = PapersAnalyzer(loader, config)
     try:
-        # Fetch references at first
-        ids = ids + analyzer.load_references(
-            ids[0], limit=LIMIT
-        )
-        # And then expand
-        ids = expand_ids(
-            ids, LIMIT, loader,
-            PapersAnalyzer.EXPAND_LIMIT,
-            PapersAnalyzer.EXPAND_CITATIONS_Q_LOW,
-            PapersAnalyzer.EXPAND_CITATIONS_Q_HIGH,
-            PapersAnalyzer.EXPAND_CITATIONS_SIGMA,
-            PapersAnalyzer.EXPAND_SIMILARITY_THRESHOLD
-        )
+        ids = expand_ids(loader=loader, ids=ids, single_paper=True, limit=LIMIT, max_expand=PapersAnalyzer.EXPAND_LIMIT,
+                         citations_q_low=PapersAnalyzer.EXPAND_CITATIONS_Q_LOW,
+                         citations_q_high=PapersAnalyzer.EXPAND_CITATIONS_Q_HIGH,
+                         citations_sigma=PapersAnalyzer.EXPAND_CITATIONS_SIGMA,
+                         similarity_threshold=PapersAnalyzer.EXPAND_SIMILARITY_THRESHOLD,
+                         single_paper_impact=PapersAnalyzer.SINGLE_PAPER_IMPACT)
 
         analyzer.analyze_papers(ids, query, task=None)
     finally:
