@@ -1,4 +1,4 @@
-# Nature Reviews Reference Clustering
+# PubTrends clustering analysis based on Nature Reviews papers
 
 This is the source code for the [Open Access Paper](https://doi.org/10.1145/3459930.3469501). \
 Shpynov, O. and Nikolai, K., 2021, August. PubTrends: a scientific literature explorer. In Proceedings of the 12th ACM Conference on Bioinformatics, Computational Biology, and Health Informatics (pp. 1-1).
